@@ -39,6 +39,8 @@ __credits__ = ["Mahesh Gudi", "Aditya P.", "Ankit Javalkar",
 # Helper functions
 
 def is_email_checked(user):
+    if not hasattr(user, 'profile'):
+        return True
     return user.profile.is_email_verified
 
 
@@ -81,7 +83,7 @@ def user_login(request):
         form = UserLoginForm(request.POST)
         if form.is_valid():
             user = form.cleaned_data
-            if user.profile.is_email_verified:
+            if not hasattr(user, 'profile') or user.profile.is_email_verified:
                 login(request, user)
                 return redirect(get_landing_page(user))
             else:
@@ -478,7 +480,7 @@ def view_own_profile(request):
     """User can view own profile """
     user = request.user
     if user.is_superuser:
-        return redirect("admin")
+        return redirect("/admin/")
     profile = user.profile
     if request.method == 'POST':
         form = ProfileForm(request.POST, user=user, instance=profile)

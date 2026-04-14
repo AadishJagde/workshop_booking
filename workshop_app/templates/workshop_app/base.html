@@ -93,7 +93,7 @@
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            <span class="material-icons" style="vertical-align: middle">account_circle</span>
                             <p style="display: inline; vertical-align: middle">
-                                {{user.get_full_name|title}}
+                                {% if user.get_full_name %}{{ user.get_full_name|title }}{% else %}{{ user.username|title }}{% endif %}
                             </p>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -101,7 +101,7 @@
                             <a class="dropdown-item" href="{% url 'password_change' %}">
                                  Change Password
                             </a>
-                            <a class="dropdown-item" href="{% url 'workshop_app:logout' %}">Logout</a>
+                            <a class="dropdown-item" href="{% url 'workshop_app:logout' %}" onclick="return confirm('Are you sure you want to log out?');">Logout</a>
                         </div>
                     </li>
                 </ul>
