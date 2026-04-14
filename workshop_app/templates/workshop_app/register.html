@@ -1,35 +1,92 @@
 {% extends 'workshop_app/base.html' %}
+{% load static %}
 
-	{% block title %}
-		Register
-	{% endblock %}
+{% block title %}Create Account{% endblock %}
+
+{% block header %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block extra-dependencies %}
+<link rel="stylesheet" href="{% static 'workshop_app/css/auth.css' %}">
+<style>
+    body { background-color: #e3e7f9 !important; }
+    .base-content { 
+        padding-top: 0 !important; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        min-height: 100vh; 
+        width: 100%;
+        padding: 40px 20px;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
+<div class="auth-page" style="width: 100%; display: flex; justify-content: center;">
+    <div class="auth-card" style="max-width: 500px;">
+        <div class="auth-header">
+            <!-- Back Arrow -->
+            <a href="javascript:history.back()" class="back-btn" title="Go Back">
+                &lt;
+            </a>
+            <h1 class="auth-title">Create Account</h1>
+            <p class="auth-subtitle">Create new account here</p>
+        </div>
 
-	<style type="text/css">
-    	label.required::after {
-    	content: "*";
-    	color: red;
-		}
+        <form class="auth-form" method="post">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+                <ul class="errorlist" style="margin-bottom: 20px; border: 2px solid #000; border-radius: 4px; padding: 10px; background-color: #fff4f4;">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li><strong>{{ field.label }}:</strong> {{ error|escape }}</li>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <li>{{ error|escape }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
 
-		.errorlist {
-      color: red;
-    }
-	</style>
+            {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label|title }}{% if field.field.required %} <span style="color:red;">*</span>{% endif %}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <small style="color: #666; font-size: 11px; margin-top: 4px; display: block;">{{ field.help_text }}</small>
+                {% endif %}
+            </div>
+            {% endfor %}
 
-	<div class="container" >
-		<br>
-		<h3>Coordinator Registration Form</h3>
-		<br>
-		<form action="" method="post">
-			{% csrf_token %}
-				<table class="table table-bordered">
-					{{ form.as_table }}
-				</table>
+            <div class="auth-checkbox-group">
+                <input type="checkbox" id="terms" class="neo-checkbox" required>
+                <label for="terms" style="font-size: 13px; font-weight: 500; display: inline;">
+                    I agree to the <a href="#">Terms & Conditions</a> and <a href="#">privacy Policy</a>
+                </label>
+            </div>
 
-				<button class="btn btn-primary" type="submit">Register</button>
-		</form><br>
-		<!-- Activate when Instructor registeration starts -->
-		<br>
-	</div>
+            <button type="submit" class="neo-btn neo-btn-primary">Create Account</button>
+        </form>
+
+        <div class="auth-divider">
+            Or Continue with
+        </div>
+
+        <div class="social-btns">
+            <!-- These currently link to # as requested since oauth is not yet set up -->
+            <a href="#" class="neo-btn neo-btn-secondary">
+                <span style="font-size: 20px; font-weight: bold;">G</span> Sign up with Google
+            </a>
+            <a href="#" class="neo-btn neo-btn-secondary">
+                <span style="font-size: 20px; font-weight: bold;">f</span> Sign up with Facebook
+            </a>
+        </div>
+
+        <div class="auth-bottom-nav">
+            Already have an account? <a href="{% url 'workshop_app:login' %}">Sign In</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

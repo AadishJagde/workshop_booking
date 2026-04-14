@@ -1,0 +1,198 @@
+/* Global Neo-Brutalism Styles for Workshop App */
+
+body {
+    background-color: #e3e7f9; /* Soft background */
+    font-family: 'Inter', sans-serif !important;
+    color: #000;
+}
+
+/* Base Content Layout */
+.base-content {
+    background-color: #e3e7f9;
+    padding-top: 80px; /* Account for fixed navbar */
+    min-height: calc(100vh - 60px); 
+    padding-bottom: 40px;
+}
+
+/* Navbar overrides */
+.navbar {
+    background-color: #fff !important;
+    border-bottom: 3px solid #000;
+    box-shadow: 0 4px 0 #000;
+    padding: 12px 20px;
+}
+
+.navbar-brand {
+    color: #000 !important;
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+}
+
+.navbar .nav-link {
+    color: #000 !important;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 8px 16px;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    margin: 0 4px;
+}
+
+.navbar .nav-link:hover {
+    background-color: #084cff;
+    color: #fff !important;
+    border: 2px solid #000;
+    box-shadow: 2px 2px 0 #000;
+    transform: translate(-2px, -2px);
+}
+
+.navbar-toggler {
+    border: 2px solid #000 !important;
+    background-color: #084cff !important;
+    border-radius: 4px;
+    box-shadow: 2px 2px 0 #000;
+}
+
+.navbar-toggler-icon {
+    filter: invert(1);
+}
+
+.dropdown-menu {
+    border: 3px solid #000;
+    border-radius: 0;
+    box-shadow: 4px 4px 0 #000;
+    padding: 0;
+}
+
+.dropdown-item {
+    font-weight: 600;
+    border-bottom: 1px solid #000;
+    padding: 10px 20px;
+}
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+.dropdown-item:hover {
+    background-color: #084cff;
+    color: #fff;
+}
+
+/* Buttons */
+.btn {
+    font-weight: 700;
+    border: 3px solid #000 !important;
+    box-shadow: 4px 4px 0 #000 !important;
+    border-radius: 6px;
+    transition: all 0.1s ease;
+    text-transform: none;
+}
+
+.btn:active {
+    transform: translate(4px, 4px) !important;
+    box-shadow: 0 0 0 #000 !important;
+}
+
+.btn-primary, .btn-info {
+    background-color: #084cff !important;
+    color: #fff !important;
+}
+
+.btn-success {
+    background-color: #00d084 !important;
+    color: #000 !important;
+}
+
+.btn-danger {
+    background-color: #ff3b30 !important;
+    color: #fff !important;
+}
+
+.btn-warning {
+    background-color: #ffcc00 !important;
+    color: #000 !important;
+}
+
+/* Cards / Panels */
+.card, .panel, .jumbotron {
+    background-color: #fff;
+    border: 3px solid #000 !important;
+    border-radius: 12px !important;
+    box-shadow: 6px 6px 0 #000 !important;
+    margin-bottom: 24px;
+}
+
+.card-header, .panel-heading {
+    background-color: #f7f7f7;
+    border-bottom: 3px solid #000 !important;
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: #000;
+}
+
+/* Tables */
+.table {
+    background-color: #fff;
+    border: 3px solid #000;
+    box-shadow: 4px 4px 0 #000;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.table th, .table td {
+    border: 1px solid #000;
+    padding: 12px 16px;
+    color: #000;
+    font-weight: 500;
+}
+
+.table thead th {
+    background-color: #ffcc00; /* Distinctive bold header color */
+    border-bottom: 3px solid #000 !important;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+/* Footer */
+.footer {
+    background-color: #fff;
+    border-top: 3px solid #000;
+    padding: 20px 0;
+    color: #000;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Badges */
+.badge {
+    border: 2px solid #000;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-weight: 700;
+    box-shadow: 2px 2px 0 #000;
+}
+
+.badge-success { background-color: #00d084; color: #000; }
+.badge-warning { background-color: #ffcc00; color: #000; }
+.badge-danger { background-color: #ff3b30; color: #fff; }
+.badge-info { background-color: #084cff; color: #fff; }
+
+/* Forms (not in auth) */
+input.form-control, select.form-control, textarea.form-control {
+    border: 2px solid #000;
+    border-radius: 6px;
+    box-shadow: 2px 2px 0 #000;
+    font-weight: 500;
+}
+input.form-control:focus, select.form-control:focus, textarea.form-control:focus {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 #000;
+    border-color: #000;
+    outline: none;
+}

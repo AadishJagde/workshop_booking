@@ -1,53 +1,89 @@
 {% extends 'workshop_app/base.html' %}
+{% load static %}
 
-{% block title %}
-    Login
+{% block title %}Sign In{% endblock %}
+
+{% block header %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block extra-dependencies %}
+<link rel="stylesheet" href="{% static 'workshop_app/css/auth.css' %}">
+<style>
+    body { background-color: #e3e7f9 !important; }
+    .base-content { 
+        padding-top: 0 !important; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        min-height: 100vh; 
+        width: 100%;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-md-offset-6">
-                <div class="card">
-                    <div class="card-body">
-                        <form class="px-3 py-3" method="post">
-                        {% csrf_token %}
-                        {% if form.errors %}
-                            {% for field in form %}
-                                {% for error in field.errors %}
-                                    <div class="alert alert-dismissible alert-danger">
-                                        <button type="button" class="close" data-dismiss="alert">
-                                            <i class="fa fa-close"></i>
-                                        </button>
-                                        <strong>{{ error|escape }}</strong>
-                                    </div>
-                                {% endfor %}
-                            {% endfor %}
-                            {% for error in form.non_field_errors %}
-                                <div class="alert alert-dismissible alert-danger">
-                                    <button type="button" class="close" data-dismiss="alert">
-                                        <i class="fa fa-close"></i>
-                                    </button>
-                                    <strong>{{ error|escape }}</strong>
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                        <div class="form-group">
-                          <label for="id_username">Username</label>
-                          {{ form.username }}
-                        </div>
-                        <div class="form-group">
-                          <label for="id_password">Password</label>
-                          {{ form.password }}
-                        </div>
-                        <button type="submit" class="btn btn-primary">Sign in</button>
-                        </form>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'workshop_app:register' %}">New around here? Sign up</a>
-                        <a class="dropdown-item" href="{% url 'password_reset' %}">Forgot password?</a>
-                    </div>
-                </div>  
+<div class="auth-page" style="width: 100%; display: flex; justify-content: center; padding: 20px;">
+    <div class="auth-card">
+        <div class="auth-header">
+            <!-- Back Arrow -->
+            <a href="javascript:history.back()" class="back-btn" title="Go Back">
+                &lt;
+            </a>
+            <h1 class="auth-title">Sign In</h1>
+            <p class="auth-subtitle">Welcome back and enjoy</p>
+        </div>
+
+        <form class="auth-form" method="post">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+                <ul class="errorlist" style="margin-bottom: 12px; border: 2px solid #000; border-radius: 4px; padding: 10px; background-color: #fff4f4;">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error|escape }}</li>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <li>{{ error|escape }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="id_username">Email/Username</label>
+                <!-- Django's default UserLoginForm uses "username" but we style it like the mockup -->
+                <input type="text" name="username" class="neo-input" placeholder="Your email or username" required id="id_username">
             </div>
+
+            <div class="form-group">
+                <label for="id_password">Password</label>
+                <input type="password" name="password" class="neo-input" placeholder="Your password" required id="id_password">
+            </div>
+
+            <div style="display: flex; justify-content: flex-start; margin-bottom: 20px;">
+                <a href="{% url 'password_reset' %}" class="auth-forgot">Forgot Password</a>
+            </div>
+
+            <button type="submit" class="neo-btn neo-btn-primary">Sign In</button>
+        </form>
+
+        <div class="auth-divider">
+            Or Continue with
+        </div>
+
+        <div class="social-btns">
+            <!-- These currently link to # as requested since oauth is not yet set up -->
+            <a href="#" class="neo-btn neo-btn-secondary">
+                <span style="font-size: 20px; font-weight: bold;">G</span> Sign in with Google
+            </a>
+            <a href="#" class="neo-btn neo-btn-secondary">
+                <span style="font-size: 20px; font-weight: bold;">f</span> Sign in with Facebook
+            </a>
+        </div>
+
+        <div class="auth-bottom-nav">
+            Don't have an account? <a href="{% url 'workshop_app:register' %}">Sign up</a>
         </div>
     </div>
+</div>
 {% endblock %}
